@@ -1,5 +1,5 @@
 
-local AuthToken = "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"
+local AuthToken = ""
 
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
