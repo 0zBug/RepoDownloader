@@ -1,5 +1,8 @@
 
-local AuthToken = ""
+-- getgenv().AuthToken = "AUTHTOKEN"
+if not AuthoToken then
+	print("Get your auth token at https://github.com/settings/tokens.")
+end
 
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
