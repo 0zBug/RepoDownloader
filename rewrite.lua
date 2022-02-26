@@ -39,7 +39,7 @@ end
 
 function RepoDownloader:DownloadRepository(Repository) -- Args: Repository (string) Example: "0zBug/RepoDownloader"
     makefolder(Repository)
-    DownloadDirectory(string.format("https://api.github.com/repos/%s/contents", Repository))
+    DownloadDirectory(Repository, string.format("https://api.github.com/repos/%s/contents", Repository))
 end
 
 function RepoDownloader:DownloadRepositories(User) -- Args: User (string) Example: "0zBug"
