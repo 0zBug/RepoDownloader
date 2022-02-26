@@ -203,6 +203,7 @@ local rand = math.random
 local max = math.max
 local min = math.min
 local floor = math.floor
+local request = syn.request or request
 
 local function bytes(n)
     local s = tostring(math.floor(n))
@@ -219,7 +220,7 @@ end
 local Files = {}
 local TotalBytes = 0
 local function FetchDirectory(Path, Directory)
-    local Directory = game.HttpService:JSONDecode(syn.request({
+    local Directory = game.HttpService:JSONDecode(request({
         Url = Directory,
         Headers = Headers
     }).Body)
