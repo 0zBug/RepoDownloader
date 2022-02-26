@@ -1,6 +1,6 @@
 
 -- getgenv().AuthToken = "AUTHTOKEN"
-if not AuthoToken then
+if not AuthToken then
 	print("Get your auth token at https://github.com/settings/tokens.")
 end
 
@@ -251,9 +251,11 @@ Accept.Activated:Connect(function()
     makefolder(Repository)
     local Repository = FetchDirectory(Repository, string.format("https://api.github.com/repos/%s/contents", Repository))
     local Downloaded = 0
-    local x = {}
+    local eta = {}
     
-    for i = 1,2 do x[#x+1] = {0, 0, os.clock()} end
+    for i = 1,2 do 
+        table.insert(eta, {0, 0, os.clock()})
+    end
     
     for i,v in pairs(Repository) do
         writefile(v[1], game:HttpGet(v[2]))
@@ -261,9 +263,21 @@ Accept.Activated:Connect(function()
 
         local Percentage = math.floor((Downloaded / TotalBytes) * 100)
 
-        while os.clock() - x[1][3] > 1 and #v > 3 do table.remove(x, 1) end
-        x[#x+1] = {Downloaded - x[#x-1][2] or 0, Downloaded, os.clock()}
-        PerSecond = 0 for i,v in next, x do PerSecond = PerSecond + v[1] end
+        while os.clock() - eta[1][3] > 1 and #v > 3 do 
+            table.remove(eta, 1) 
+        end
+
+        table.insert(eta, {
+            Downloaded - eta[#eta - 1][2] or 0,
+            Downloaded,
+            os.clock()
+        })
+
+        local PerSecond = 0 
+        for i,v in next, eta do 
+            PerSecond = PerSecond + v[1] 
+        end
+
         local Estimate = hms((TotalBytes - Downloaded) / PerSecond + 0.9999)
 
         local FilePath = v[1]
@@ -273,4 +287,11 @@ Accept.Activated:Connect(function()
     end
 
     DownloadFrame.Visible = false
+    ScreenGui:Destroy()
+end)
+
+Cancel.Activated:Connect(function()
+    DownloadFrame.Visible = false
+    InputFrame.Visible = false
+    ScreenGui:Destroy()
 end)
