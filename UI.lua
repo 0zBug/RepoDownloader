@@ -1,7 +1,8 @@
 
 -- getgenv().AuthToken = "AUTHTOKEN"
-if not AuthToken then
+if AuthToken == "" then
 	print("Get your auth token at https://github.com/settings/tokens.")
+	return
 end
 
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
