@@ -1,5 +1,5 @@
 
-local AuthToken = ""
+local AuthToken = "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"
 
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -248,16 +248,24 @@ Accept.Activated:Connect(function()
     makefolder(Repository)
     local Repository = FetchDirectory(Repository, string.format("https://api.github.com/repos/%s/contents", Repository))
     local Downloaded = 0
-
+    local x = {}
+    
+    for i = 1,2 do x[#x+1] = {0, 0, os.clock()} end
+    
     for i,v in pairs(Repository) do
         writefile(v[1], game:HttpGet(v[2]))
         Downloaded = Downloaded + v[3]
 
         local Percentage = math.floor((Downloaded / TotalBytes) * 100)
-        local Time = math.floor((TotalBytes - Downloaded) / (Downloaded))
+
+        while os.clock() - x[1][3] > 1 and #v > 3 do table.remove(x, 1) end
+        x[#x+1] = {Downloaded - x[#x-1][2] or 0, Downloaded, os.clock()}
+        PerSecond = 0 for i,v in next, x do PerSecond = PerSecond + v[1] end
+        local Estimate = hms((TotalBytes - Downloaded) / PerSecond + 0.9999)
+
         local FilePath = v[1]
 
-        PercentageStatus.Text = string.format("Downloading %s (%s%%) - %s remaining", bytes(Downloaded), Percentage, hms(Time))
+        PercentageStatus.Text = string.format("%s%% (%s / %s) eta %s", Percentage, bytes(Downloaded), bytes(TotalBytes), Estimate)
         FileStatus.Text = string.format("Downloading %s (%s)", FilePath, bytes(v[3]))
     end
 
