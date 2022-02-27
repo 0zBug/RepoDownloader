@@ -260,7 +260,8 @@ Accept.Activated:Connect(function()
     end
     
     for i,v in pairs(Repository) do
-        writefile(v[1], game:HttpGet(v[2]))
+	FileStatus.Text = string.format("Downloading %s (%s)", v[1], bytes(v[3]))
+	writefile(v[1], game:HttpGet(v[2]))
         Downloaded = Downloaded + v[3]
 
         local Percentage = math.floor((Downloaded / TotalBytes) * 100)
@@ -282,10 +283,7 @@ Accept.Activated:Connect(function()
 
         local Estimate = hms((TotalBytes - Downloaded) / PerSecond + 0.9999)
 
-        local FilePath = v[1]
-
         PercentageStatus.Text = string.format("%s%% (%s / %s) eta %s", Percentage, bytes(Downloaded), bytes(TotalBytes), Estimate)
-        FileStatus.Text = string.format("Downloading %s (%s)", FilePath, bytes(v[3]))
     end
 
     DownloadFrame.Visible = false
