@@ -261,7 +261,11 @@ Accept.Activated:Connect(function()
     
     for i,v in pairs(Repository) do
 	FileStatus.Text = string.format("Downloading %s (%s)", v[1], bytes(v[3]))
-	writefile(v[1], game:HttpGet(v[2]))
+			
+	pcall(function()
+		writefile(v[1], game:HttpGet(v[2]))
+	end)
+			
         Downloaded = Downloaded + v[3]
 
         local Percentage = math.floor((Downloaded / TotalBytes) * 100)
