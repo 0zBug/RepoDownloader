@@ -35,8 +35,8 @@ Stroke.Size = UDim2.fromScale(0.99, 0.95)
 local UIStroke = Instance.new("UIStroke", Stroke)
 UIStroke.Color = Color3.fromRGB(53, 53, 53)
 
-local UICorner1 = Instance.new("UICorner", Stroke)
-UICorner1.CornerRadius = UDim.new(0, 6)
+local UICorner = Instance.new("UICorner", Stroke)
+UICorner.CornerRadius = UDim.new(0, 6)
 
 local DownloadBar = Instance.new("Frame", DownloadFrame)
 DownloadBar.AnchorPoint = Vector2.new(0.5, 0.5)
