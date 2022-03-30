@@ -1,4 +1,5 @@
 # RepoDownloader
+A simple module to clone repositories with requests
 ```lua
 RepoDownloader:Auth("User Token Here") -- Go to github.com/settings/tokens to generate a key (It doesnt need any permissions)
 
