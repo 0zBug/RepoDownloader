@@ -1,7 +1,7 @@
 # RepoDownloader
 A simple module to clone repositories with requests
 
-Go to github.com/settings/tokens to generate your Token. (doesn't need any permissions)
+Go to https://github.com/settings/tokens to generate your Token. (doesn't need any permissions)
 
 # Module
 ```lua
