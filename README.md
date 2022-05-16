@@ -1,8 +1,8 @@
 # RepoDownloader
-A simple module to clone repositories with requests. 
+**A simple module to clone repositories with requests.** 
 
 # AuthToken
-Go to github.com/settings/tokens to generate a token.
+**Go to github.com/settings/tokens to generate a token.**
 
 # UI
 ```lua
